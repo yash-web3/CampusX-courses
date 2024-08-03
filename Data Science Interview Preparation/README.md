@@ -50,4 +50,6 @@ Prepare to excel in data science interviews with our comprehensive course design
 | Instructor name  | Link |
 |-----------------|-------------------------|
 | Session 1 - Foundation and Technical Skills |[![YouTube](https://img.shields.io/badge/YouTube-Video-green)](https://youtu.be/kXmBKomGcE4?si=R5h_FR-jvoOJk-UW)|
+| Session 2 - Programming and Technical Skills |[![YouTube](https://img.shields.io/badge/YouTube-Video-green)](https://youtu.be/a5aOpzisUHc?si=usDVUYUdt7IgCrne) |
+| Session 3 - Machine Learning and Case Studies |[![YouTube](https://img.shields.io/badge/YouTube-Video-green)](https://youtu.be/EGitUUh8daU?si=gbVywgsL_SPeDIfR) |
 
