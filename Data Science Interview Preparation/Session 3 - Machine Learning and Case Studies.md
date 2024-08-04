@@ -341,3 +341,185 @@ Following these steps ensures a thorough understanding and practical implementat
 
 This approach ensures a structured and comprehensive analysis of the customer churn problem, leading to actionable insights and a robust predictive model for the airline company.
 
+![alt text](image.png)
+The image contains two sets of results from different statistical models: an ARIMA model and an OLS regression model. Let's break down and explain each part of these outputs in detail.
+
+### ARIMA Model Results
+
+#### ARIMA Model Code
+```python
+from statsmodels.tsa.arima_model import ARIMA
+
+arima_model = ARIMA(df.value, order=(1,2,2))
+model = arima_model.fit()
+print(model.summary())
+```
+
+#### ARIMA Model Output
+```
+ARIMA Model Results
+Dep. Variable: D2.value No. Observations: 98
+Model: ARIMA(1, 2, 2) Log Likelihood -252.446
+Method: css-mle S.D. of innovations 3.130
+Date: Sun, 09 Jan 2022 AIC 514.893
+Time: 16:54:19 BIC 527.818
+Sample: 2 HQIC 520.121
+```
+
+#### Interpretation
+
+- **Dep. Variable**: The dependent variable, `D2.value`, indicates the second differenced value of the original data.
+- **No. Observations**: The number of observations, which is 98.
+- **Model**: Specifies the ARIMA model order `(p,d,q)`, where p=1, d=2, q=2.
+- **Log Likelihood**: The log-likelihood of the model, which is -252.446.
+- **Method**: The method used for fitting the model, `css-mle` (conditional sum of squares - maximum likelihood estimation).
+- **S.D. of innovations**: The standard deviation of the model's residuals, which is 3.130.
+- **Date**: The date when the model was run.
+- **Time**: The time when the model was run.
+- **AIC**: Akaike Information Criterion, which is 514.893. Lower values indicate a better model fit.
+- **BIC**: Bayesian Information Criterion, which is 527.818. Lower values indicate a better model fit.
+- **HQIC**: Hannan-Quinn Information Criterion, which is 520.121. Lower values indicate a better model fit.
+- **Sample**: The sample size, which starts from the second observation because of the differencing.
+
+#### Coefficients Table
+```
+coef std err z P>|z| [0.025 0.975]
+const 0.6245 0.447 1.399 0.162 -0.253 1.502
+ar.L1.D2.value 0.6003 0.199 3.017 0.003 0.210 0.991
+ma.L1.D2.value -0.6480 0.203 -3.192 0.001 -1.046 -0.250
+ma.L2.D2.value -0.5260 0.091 -5.757 0.000 -0.704 -0.348
+```
+
+- **coef**: The estimated coefficients for the model.
+- **std err**: The standard error of the coefficients.
+- **z**: The z-statistic for the hypothesis test.
+- **P>|z|**: The p-value for the hypothesis test. Lower values (typically < 0.05) indicate statistical significance.
+- **[0.025 0.975]**: The 95% confidence interval for the coefficients.
+
+### OLS Regression Results
+
+#### OLS Model Output
+```
+OLS Regression Results
+Dep. Variable: housing_price_index R-squared: 0.980
+Model: OLS Adj. R-squared: 0.974
+Method: Least Squares F-statistic: 168.5
+Date: Fri, 13 Apr 2018 Prob (F-statistic): 7.32e-14
+Time: 16:31:58 Log-Likelihood: -55.164
+No. Observations: 23 AIC: 122.3
+Df Residuals: 17 BIC: 129.1
+Df Model: 5 
+Covariance Type: nonrobust
+```
+
+#### Interpretation
+
+- **Dep. Variable**: The dependent variable, `housing_price_index`.
+- **R-squared**: The coefficient of determination, 0.980, indicating 98% of the variance in the dependent variable is explained by the model.
+- **Adj. R-squared**: The adjusted R-squared, 0.974, adjusts the R-squared value for the number of predictors in the model.
+- **Model**: Indicates the type of model, which is Ordinary Least Squares (OLS).
+- **Method**: The method used for fitting the model, `Least Squares`.
+- **F-statistic**: The F-statistic for the model, 168.5.
+- **Prob (F-statistic)**: The p-value for the F-statistic, 7.32e-14, indicating the model is statistically significant.
+- **Date**: The date when the model was run.
+- **Time**: The time when the model was run.
+- **Log-Likelihood**: The log-likelihood of the model, -55.164.
+- **No. Observations**: The number of observations, 23.
+- **AIC**: Akaike Information Criterion, 122.3.
+- **Df Residuals**: Degrees of freedom of the residuals, 17.
+- **BIC**: Bayesian Information Criterion, 129.1.
+- **Df Model**: Degrees of freedom of the model, 5.
+- **Covariance Type**: Indicates the type of covariance used, `nonrobust`.
+
+#### Coefficients Table
+```
+coef std err t P>|t| [0.025 0.975]
+Intercept -389.2234 187.252 -2.079 0.053 -784.291 5.844
+total_unemployed -0.1727 2.399 -0.072 0.943 -5.234 4.889
+long_interest_rate 5.4326 1.524 3.564 0.002 2.216 8.649
+federal_funds_rate 32.3750 9.231 3.507 0.003 12.889 51.852
+consumer_price_index 0.7785 0.360 2.164 0.045 0.020 1.537
+gross_domestic_product 0.0252 0.010 2.472 0.024 0.004 0.047
+```
+
+- **coef**: The estimated coefficients for each predictor.
+- **std err**: The standard error of the coefficients.
+- **t**: The t-statistic for the hypothesis test.
+- **P>|t|**: The p-value for the hypothesis test. Values less than 0.05 indicate statistical significance.
+- **[0.025 0.975]**: The 95% confidence interval for the coefficients.
+
+#### Additional Statistics
+- **Omnibus**: A test for normality of the residuals. A value of 1.363 suggests the residuals are approximately normally distributed.
+- **Durbin-Watson**: A test for autocorrelation in the residuals. A value of 1.899 indicates little to no autocorrelation.
+- **Prob(Omnibus)**: The p-value for the Omnibus test, 0.506.
+- **Jarque-Bera (JB)**: A test for normality. A value of 1.043 suggests the residuals are approximately normally distributed.
+- **Skew**: Measures the asymmetry of the residuals, -0.271 indicates slight skewness.
+- **Prob(JB)**: The p-value for the Jarque-Bera test, 0.594.
+- **Kurtosis**: Measures the peakedness of the residuals, 2.109 indicates approximately normal distribution.
+- **Cond. No.**: A measure of multicollinearity in the predictors, 4.58e+06 suggests some multicollinearity.
+
+These outputs provide detailed information about the performance, significance, and diagnostics of the ARIMA and OLS models, respectively.
+
+![alt text](image-1.png)
+
+The image contains two different analyses: a K-means cluster analysis and a SHAP (SHapley Additive exPlanations) plot.
+
+### K-means Cluster Analysis
+
+#### Final Partition
+- **Number of clusters**: 3
+
+#### Cluster Details
+1. **Cluster 1**
+   - **Number of observations**: 6
+   - **Within cluster sum of squares**: 1.4796E+13
+   - **Average distance from centroid**: 1310396.667
+   - **Maximum distance from centroid**: 2715650.000
+
+2. **Cluster 2**
+   - **Number of observations**: 10
+   - **Within cluster sum of squares**: 1.19754E+14
+   - **Average distance from centroid**: 2900172.501
+   - **Maximum distance from centroid**: 5164312.500
+
+3. **Cluster 3**
+   - **Number of observations**: 6
+   - **Within cluster sum of squares**: 1.0189E+14
+   - **Average distance from centroid**: 3403733.334
+   - **Maximum distance from centroid**: 7721505.000
+
+#### Cluster Centroids
+| Variable      | Cluster 1  | Cluster 2  | Cluster 3  | Grand centroid |
+|---------------|------------|------------|------------|----------------|
+| **Clients**   | 132.1667   | 106.3000   | 62.0000    | 101.2727       |
+| **Rate of Return** | 14.0000 | 11.0400 | 9.6167 | 11.4591 |
+| **Sales**     | 4.7684E+07 | 3.76302E+07| 2.22905E+07| 3.61887E+07     |
+| **Years**     | 14.6667    | 11.1000    | 6.8333     | 10.9091         |
+
+### SHAP (SHapley Additive exPlanations) Plot
+
+The SHAP plot shows the contribution of different features to the model prediction for a specific instance.
+
+#### Features and Contributions
+- **NEW PASS ...IONS-3**: -233k (negative contribution)
+- **China Fin. ...ffic**: 61.7k (positive contribution)
+- **HCP All Items**: -43.5k (negative contribution)
+- **Employme ... Zone**: 30.6k (positive contribution)
+- **World Co ... USD**: 15.2k (positive contribution)
+- **Real Dis ... come**: 13.7k (positive contribution)
+- **Man Ind. d ...SA**: 13.7k (positive contribution)
+- **Trend N. ...IONS**: 12.3k (positive contribution)
+- **World G. ... USD**: 10.9k (positive contribution)
+- **China Fi ...ways**: 9.2k (positive contribution)
+- **EU Busi. ... Equal**: 8.5k (positive contribution)
+- **Euro Are ... cator**: 6.7k (positive contribution)
+- **USED VEH ... CARS**: -4.18k (negative contribution)
+- **Overall Prediction**: 747.6k
+
+### Summary
+
+- **K-means Cluster Analysis**: This analysis groups data into three clusters based on clients, rate of return, sales, and years. Each cluster has its centroids for the variables, showing the average characteristics of the data points in each cluster.
+- **SHAP Plot**: The SHAP plot explains the contributions of different features to the model's prediction. Positive SHAP values indicate features that increase the prediction, while negative values indicate features that decrease the prediction. The overall prediction is 747.6k.
+
+
+
